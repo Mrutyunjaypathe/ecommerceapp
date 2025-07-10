@@ -71,7 +71,7 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(height: screenHeight * 0.01),
 
             Text(
-              'Silahkan masukkan data untuk login',
+              'Please enter your data to login',
               style: TextStyle(
                 fontSize: screenWidth * 0.04 / textScaleFactor, // Responsive font size
                 color: Colors.grey[600],
@@ -189,9 +189,8 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      // Handle Forgot Password
-                      print('Forgot Password pressed');
-                      // context.go('/forgot_password'); // Example navigation
+                      // Navigate to reset password screen
+                      context.push('/resetpage');
                     },
                     child: Text(
                       'Forgot Password',
@@ -202,6 +201,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                   ),
+
                   SizedBox(height: screenHeight * 0.01),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

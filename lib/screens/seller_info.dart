@@ -18,42 +18,42 @@ class InfoSellerPage extends StatelessWidget {
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
@@ -89,7 +89,7 @@ class InfoSellerPage extends StatelessWidget {
             icon: const Icon(Icons.shopping_cart, color: Colors.black),
             onPressed: () {
               debugPrint('Cart tapped');
-              context.go('/detail'); // Navigate to a generic detail screen or cart
+              context.push('/detail'); // Navigate to a generic detail screen or cart
             },
           ),
         ],
@@ -149,7 +149,7 @@ class InfoSellerPage extends StatelessWidget {
                                   Icon(Icons.location_on, color: Colors.grey, size: screenWidth * 0.04),
                                   SizedBox(width: screenWidth * 0.01),
                                   Text(
-                                    'Jawa Barat, Bandung (Jam Buka 08:00-21:00)',
+                                    'West Side, Near Prozone Mall (Opening Hours 08:00-21:00)',
                                     style: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: screenWidth * 0.035 / textScaleFactor,
@@ -173,9 +173,9 @@ class InfoSellerPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildStatItem('Pengikut', '23 Rb', screenWidth, textScaleFactor),
-                        _buildStatItem('Produk', '150 Item', screenWidth, textScaleFactor),
-                        _buildStatItem('Bergabung', '20 Okt 2021', screenWidth, textScaleFactor),
+                        _buildStatItem('followers', '23 k', screenWidth, textScaleFactor),
+                        _buildStatItem('Product', '150 Item', screenWidth, textScaleFactor),
+                        _buildStatItem('Join', '20 Oct 2021', screenWidth, textScaleFactor),
                       ],
                     ),
                   ),
@@ -186,7 +186,7 @@ class InfoSellerPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                     child: GestureDetector(
                       onTap: () {
-                        debugPrint('Dukungan Pengiriman tapped');
+                        debugPrint('Tapped Delivery Support');
                         // Implement navigation or dialog for shipping support details
                       },
                       child: Container(
@@ -198,7 +198,7 @@ class InfoSellerPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Dukungan Pengiriman',
+                              'Shipping Support',
                               style: TextStyle(
                                 fontSize: screenWidth * 0.04 / textScaleFactor,
                                 fontWeight: FontWeight.bold,

@@ -23,14 +23,14 @@ class SearchPage extends StatelessWidget {
       {
         'title': 'TMA-2 HD Wireless',
         'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },
       {
         'title': 'TMA-2 HD Wireless',
-        'imageUrl': 'assets/images/headphone.jpg', // Changed to local asset
-        'price': 'Rp. 1.500.000',
+        'imageUrl': 'assets/images/mouse.jpg', // Changed to local asset
+        'price': 'Rs. 1.500.000',
         'rating': '4.6',
         'reviews': '86 Reviews',
       },

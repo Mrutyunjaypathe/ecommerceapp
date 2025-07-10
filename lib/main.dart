@@ -3,105 +3,122 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home_page.dart'; // Assuming this is your HomePage
-import 'screens/detail_product_page.dart'; // Your detail product page
-import 'screens/signin_page.dart'; // Import your SignInPage
+import 'screens/home_page.dart';
+import 'screens/detail_product_page.dart';
+import 'screens/signin_page.dart';
+import 'screens/detailed_news_page.dart';
+import 'screens/search.dart';
+import 'screens/review_product.dart';
+import 'screens/seller_info.dart'; // ✅ NEW import
 import 'providers/app_data_provider.dart';
-import 'screens/detailed_news_page.dart'; // Corrected import path for DetailedNewsPage
-import 'screens/search.dart'; // Corrected import path for SearchPage (assuming file is search_page.dart)
+import 'screens/category.dart';
+import 'screens/resetpage.dart';
 
-// Define a global key for GoRouter for navigation from non-widget contexts
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-// Define your GoRouter instance
 final GoRouter _router = GoRouter(
-  navigatorKey: _rootNavigatorKey, // Assign the global key here
+  navigatorKey: _rootNavigatorKey,
   routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomePage(); // Your initial route, typically HomePage
-      },
+      builder: (BuildContext context, GoRouterState state) => const HomePage(), // Use MegaMallHomePage
       routes: <RouteBase>[
         GoRoute(
           path: 'product_detail/:productId',
           builder: (BuildContext context, GoRouterState state) {
             final String? productId = state.pathParameters['productId'];
-            return DetailProductPage(productId: productId, extra: state.extra as Map<String, dynamic>?);
+            return DetailProductPage(
+              productId: productId,
+              extra: state.extra as Map<String, dynamic>?,
+            );
           },
         ),
         GoRoute(
-          path: 'news', // Route for the main News listing page
-          builder: (BuildContext context, GoRouterState state) {
-            return const NewsPage();
-          },
+          path: 'news',
+          builder: (BuildContext context, GoRouterState state) => const NewsPage(),
         ),
         GoRoute(
-          path: 'news_detail/:newsId', // Route for individual detailed news
+          path: 'news_detail/:newsId',
           builder: (BuildContext context, GoRouterState state) {
             final String? newsId = state.pathParameters['newsId'];
-            // This line correctly uses 'DetailedNewsPage'
             return DetailNewsPage(newsId: newsId);
           },
         ),
-        // Add more routes as your app grows
+        // Route for Category Gadget within the nested structure
+        GoRoute(
+          path: 'category/gadget',
+          builder: (BuildContext context, GoRouterState state) {
+            return const CategoryGadgetPage();
+          },
+        ),
       ],
     ),
-    // Define the route for your HomePage explicitly (kept as per your provided code)
     GoRoute(
-      path: '/home', // Explicit route for HomePage
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomePage();
-      },
+      path: '/home',
+      builder: (BuildContext context, GoRouterState state) => const HomePage(), // Use MegaMallHomePage
     ),
-    // Define the route for your SignInPage
     GoRoute(
-      path: '/signin', // This is the route path for your sign-in page
-      builder: (BuildContext context, GoRouterState state) {
-        return const SignInPage();
-      },
+      path: '/signin',
+      builder: (BuildContext context, GoRouterState state) => const SignInPage(),
     ),
-    // Route for the SearchPage
     GoRoute(
       path: '/search',
-      builder: (BuildContext context, GoRouterState state) {
-        return const SearchPage(); // Uses the SearchPage class
-      },
+      builder: (BuildContext context, GoRouterState state) => const SearchPage(), // Use SearchPage
     ),
-    // Example route for /detail, as used in your HomePage's cart button
     GoRoute(
       path: '/detail',
-      builder: (BuildContext context, GoRouterState state) {
-        return Scaffold(
-          appBar: AppBar(title: const Text('Detail Screen')),
-          body: const Center(child: Text('This is a generic detail screen.')),
-        );
-      },
+      builder: (BuildContext context, GoRouterState state) => const DetailProductPage(), // Use DetailScreen
     ),
-    // Example route for categories, as used in your HomePage's section headers
     GoRoute(
-      path: '/category/:name',
+      path: '/category/:name', // Generic category route, handles 'gadget' explicitly
       builder: (BuildContext context, GoRouterState state) {
         final categoryName = state.pathParameters['name'];
+        if (categoryName == 'gadget') {
+          return const CategoryGadgetPage(); // Redirect to specific Gadget page
+        }
         return Scaffold(
           appBar: AppBar(title: Text('Category: ${categoryName ?? 'Unknown'}')),
           body: Center(child: Text('Content for ${categoryName ?? 'Unknown'} category')),
         );
       },
     ),
+    GoRoute(
+      path: '/review_product',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ReviewProductPage();
+      },
+    ),
+    GoRoute(
+      path: '/seller_info', // New route for Seller Info
+      builder: (BuildContext context, GoRouterState state) {
+        return const InfoSellerPage();
+      },
+    ),
+    GoRoute(
+      path: '/resetpage', // New route for Reset Password
+      builder: (BuildContext context, GoRouterState state) {
+        return const ResetSignInScreen();
+      },
+    ),
   ],
   // Optional: Add an error page for unknown routes
-  // errorBuilder: (context, state) => ErrorScreen(error: state.error),
+  errorBuilder: (context, state) => Scaffold(
+    appBar: AppBar(title: const Text('Error')),
+    body: Center(child: Text('Page not found: ${state.error}')),
+  ),
 );
 
-
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Keep this as it's good practice
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize push notification service
+
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppDataProvider()),
+         // Add CounterProvider
       ],
       child: const MyApp(),
     ),

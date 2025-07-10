@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // Keep go_router import if you plan to use context.pop()
+import 'package:go_router/go_router.dart';
 
 class DetailProductPage extends StatelessWidget {
   final String? productId;
@@ -14,63 +14,20 @@ class DetailProductPage extends StatelessWidget {
     final screenWidth = mediaQuery.size.width;
     final textScaleFactor = mediaQuery.textScaler.scale(1.0);
 
-    final String productName = extra?['productName'] ?? 'TMA-2HD Wireless'; // Default product name
-    final String productImageUrl = extra?['imageUrl'] ?? 'assets/images/headphone.jpg'; // Default image
-    final String productPrice = extra?['newPrice'] ?? 'Rp 1.500.000'; // Default price
-
-    // Sample data for reviews (copied from detail_news_page.dart, adjusted for products)
-    final List<Map<String, String>> reviews = [
-      {
-        'name': 'Yelena Belova',
-        'rating': '4.0', // Adjusted to match visual star count in image
-        'time': '2 Minggu yang lalu',
-        'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      },
-      {
-        'name': 'Stephen Strange',
-        'rating': '3.5',
-        'time': '1 Bulan yang lalu',
-        'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      },
-      {
-        'name': 'Peter Parker',
-        'rating': '4.5',
-        'time': '2 Bulan yang lalu',
-        'comment': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      },
-    ];
-
-    // Sample data for "Featured Product" (copied from previous product page logic)
-    final List<Map<String, String>> featuredProducts = [
-      {
-        'title': 'TMA-2 HD Wireless',
-        'imageUrl': 'assets/images/headphone.jpg', // Local asset for headphone
-        'price': 'Rp. 1.500.000',
-        'rating': '4.6',
-        'reviews': '86 Reviews',
-      },
-      {
-        'title': 'TMA-2 HD Wireless',
-        'imageUrl': 'assets/images/headphone.jpg', // Local asset for drill (assuming it's a placeholder for another product)
-        'price': 'Rp. 1.500.000',
-        'rating': '4.6',
-        'reviews': '86 Reviews',
-      },
-    ];
-
+    final String productName = extra?['productName'] ?? 'TMA-2HD Wireless';
+    final String productImageUrl = extra?['imageUrl'] ?? 'assets/images/headphone.jpg';
+    final String productPrice = extra?['newPrice'] ?? 'Rs 1.500.000';
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black), // Changed to back_ios for consistency with image
-          onPressed: () {
-            context.pop(); // Navigate back
-          },
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          onPressed: () => context.pop(),
         ),
         title: Text(
-          'Detail Product', // Title from the image
+          'Detail Product',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -80,557 +37,395 @@ class DetailProductPage extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.share, color: Colors.black), // Share icon
-            onPressed: () {
-              debugPrint('Share tapped');
-            },
+            icon: const Icon(Icons.share, color: Colors.black),
+            onPressed: () => debugPrint('Share tapped'),
           ),
           IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.black), // Cart icon
-            onPressed: () {
-              debugPrint('Cart tapped');
-              context.go('/detail'); // Navigate to a generic detail screen (simulated cart)
-            },
+            icon: const Icon(Icons.shopping_cart, color: Colors.black),
+            onPressed: () => context.go('/detail'),
           ),
         ],
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Main Product Image Section
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.02),
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                    child: Image.asset(
-                      productImageUrl,
-                      width: double.infinity,
-                      height: screenHeight * 0.3,
-                      fit: BoxFit.cover, // Changed back to BoxFit.cover as per 009.png
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          width: double.infinity,
-                          height: screenHeight * 0.3,
-                          color: Colors.grey[300],
-                          child: Icon(Icons.broken_image, color: Colors.grey[600], size: screenWidth * 0.1),
-                        );
-                      },
-                    ),
+            SizedBox(height: screenHeight * 0.015),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+              child: Image.asset(
+                productImageUrl,
+                width: double.infinity,
+                height: screenHeight * 0.3,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            Text(
+              productName,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: screenWidth * 0.06 / textScaleFactor,
+              ),
+            ),
+            Text(
+              productPrice,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: screenWidth * 0.05 / textScaleFactor,
+                color: Colors.red,
+              ),
+            ),
+            Row(
+              children: [
+                Icon(Icons.star, color: Colors.amber, size: screenWidth * 0.04),
+                Text('4.6', style: TextStyle(fontSize: screenWidth * 0.035)),
+                SizedBox(width: screenWidth * 0.01),
+                Text('86 Reviews', style: TextStyle(fontSize: screenWidth * 0.035)),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green[50],
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  Positioned(
-                    bottom: screenHeight * 0.01,
-                    right: screenWidth * 0.03,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02, vertical: screenHeight * 0.005),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
-                        borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                      ),
-                      child: Text(
-                        '1/5 Foto',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: screenWidth * 0.03 / textScaleFactor,
+                  child: const Text('Reviews : 250', style: TextStyle(color: Colors.green)),
+                ),
+              ],
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            GestureDetector(
+              onTap: () => context.push('/seller_info'),
+              child: Row(
+                children: [
+                  const CircleAvatar(
+                    backgroundImage: NetworkImage('https://placehold.co/100x100/CCCCCC/000000?text=Shop'),
+                  ),
+                  SizedBox(width: screenWidth * 0.03),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Shop Larson Electronic', style: TextStyle(fontWeight: FontWeight.bold)),
+                        Row(
+                          children: const [
+                            Text('Official Store', style: TextStyle(color: Colors.grey)),
+                            SizedBox(width: 4),
+                            Icon(Icons.verified, size: 16, color: Colors.blue),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-
-            // Product Name, Price, and Rating (with "Tersedia")
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-              child: Text(
-                productName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenWidth * 0.06 / textScaleFactor,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.005),
-              child: Text(
-                productPrice,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenWidth * 0.05 / textScaleFactor,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-              child: Row(
-                children: [
-                  Icon(Icons.star, color: Colors.amber, size: screenWidth * 0.04),
-                  Text(
-                    '4.6',
-                    style: TextStyle(fontSize: screenWidth * 0.035 / textScaleFactor, color: Colors.grey[700]),
-                  ),
-                  SizedBox(width: screenWidth * 0.01),
-                  Text(
-                    '86 Reviews',
-                    style: TextStyle(fontSize: screenWidth * 0.035 / textScaleFactor, color: Colors.grey[500]),
-                  ),
-                  const Spacer(), // Pushes "Tersedia : 250" to the right
-                  Text(
-                    'Tersedia : 250', // From the image
-                    style: TextStyle(fontSize: screenWidth * 0.035 / textScaleFactor, color: Colors.green),
-                  ),
+                  const Icon(Icons.chevron_right, color: Colors.grey),
                 ],
               ),
             ),
             SizedBox(height: screenHeight * 0.02),
-
-            // Shop Information (Copied from 009.png)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-              child: Container(
-                padding: EdgeInsets.all(screenWidth * 0.03),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: screenWidth * 0.06,
-                      backgroundImage: const NetworkImage('https://placehold.co/100x100/CCCCCC/000000?text=Shop'), // Placeholder for shop logo
-                    ),
-                    SizedBox(width: screenWidth * 0.03),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Shop Larson Electronic',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: screenWidth * 0.04 / textScaleFactor,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Official Store',
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: screenWidth * 0.035 / textScaleFactor,
-                                ),
-                              ),
-                              SizedBox(width: screenWidth * 0.01),
-                              Icon(Icons.verified, color: Colors.blue, size: screenWidth * 0.04),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Icon(Icons.arrow_forward_ios, color: Colors.grey, size: screenWidth * 0.04),
-                  ],
-                ),
-              ),
+            const Text('Description Product', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text(
+              'The speaker unit contains a diaphragm that is precision–grown from NAC Audio bio–cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound–producing diaphragm to vibrate without the levels of distortion found in other speakers.',
+              style: TextStyle(color: Colors.grey[700]),
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: screenHeight * 0.025),
+            const Text('Review (86)', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            _buildReview('Helena Mickhel', '2 weeks ago', 4),
+            _buildReview('Stephen Strange', '1 weeks ago', 3),
+            _buildReview('Peter Parker', '2 months ago', 4),
 
-            // Product Description
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-              child: Text(
-                'Description Product',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenWidth * 0.045 / textScaleFactor,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.01),
-              child: Text(
-                '''The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
-
-The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
-
-The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
-
-The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
-
-The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
-                ''',
-                style: TextStyle(
-                  fontSize: screenWidth * 0.038 / textScaleFactor,
-                  height: 1.5,
-                  color: Colors.black87,
-                ),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-
-            // Review Section (Copied from 009.png)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Review (${reviews.length})',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.045 / textScaleFactor,
-                      color: Colors.black,
-                    ),
+            /// ✅ SEE ALL REVIEW BUTTON (Go to /review_product)
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  context.go('/review_product');
+                },
+                child: const Text(
+                  'See All Review',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: screenWidth * 0.04),
-                      Text(
-                        '4.6',
-                        style: TextStyle(fontSize: screenWidth * 0.035 / textScaleFactor, color: Colors.grey[700]),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
+              ),
+            ),
+
+            SizedBox(height: screenHeight * 0.025),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Featured Product', style: TextStyle(fontWeight: FontWeight.bold)),
+                TextButton(onPressed: () {}, child: const Text('See All')),
+              ],
+            ),
+            SizedBox(
+              height: screenHeight * 0.30,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                separatorBuilder: (_, __) => SizedBox(width: screenWidth * 0.03),
+                itemBuilder: (_, index) => _buildFeaturedCard(context, screenWidth),
               ),
             ),
             SizedBox(height: screenHeight * 0.01),
-            Column(
-              children: reviews.map((review) {
-                return _buildReviewItem(
-                  review['name']!,
-                  review['rating']!,
-                  review['time']!,
-                  review['comment']!,
-                  screenWidth,
-                  screenHeight,
-                  textScaleFactor,
-                );
-              }).toList(),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  debugPrint('See All Review tapped');
-                  context.go('/review_product'); // Assuming you have this route for all reviews
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.blue), // Blue border
-                  padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.1, vertical: screenHeight * 0.015),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(screenWidth * 0.025),
-                  ),
-                ),
-                child: Text(
-                  'See All Review',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: screenWidth * 0.04 / textScaleFactor),
-                ),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.03),
-
-            // Featured Product Section (Copied from 009.png)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.015),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Featured Product',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.045 / textScaleFactor,
-                      color: Colors.black,
-                    ),
-                  ),
-                  TextButton(
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
                     onPressed: () {
-                      debugPrint('See All Featured Products tapped');
-                      // context.go('/featured_products'); // Example navigation
+                      debugPrint('Favorite button tapped');
+                      // Implement favorite logic
                     },
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: screenWidth * 0.035 / textScaleFactor,
-                      ),
-                    ),
+                    icon: const Icon(Icons.favorite, color: Colors.white),
+                    label: const Text('Added'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Show the Add to Cart bottom sheet
+                      _showAddToCartBottomSheet(context, productName, productPrice, screenWidth, screenHeight, textScaleFactor);
+                    },
+                    child: const Text('Add to Cart'),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: screenHeight * 0.3, // Responsive height for horizontal list
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
-                itemCount: featuredProducts.length,
-                itemBuilder: (context, index) {
-                  final product = featuredProducts[index];
-                  return _buildProductCard(
-                    context,
-                    product['title']!,
-                    product['imageUrl']!,
-                    product['price']!,
-                    product['rating']!,
-                    product['reviews']!,
-                    screenWidth,
-                    screenHeight,
-                    textScaleFactor,
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.1), // Extra space for floating action buttons
+            SizedBox(height: screenHeight * 0.05),
           ],
         ),
       ),
-      // Persistent bottom bar with Add and Favorite buttons (from 009.png)
-      bottomSheet: _buildPersistentBottomBar(screenWidth, screenHeight, textScaleFactor),
     );
   }
 
-  // Helper method to build individual review items (Copied from detail_news_page.dart)
-  Widget _buildReviewItem(String name, String rating, String time, String comment,
-      double screenWidth, double screenHeight, double textScaleFactor) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.01),
-      child: Column(
+  Widget _buildReview(String name, String time, int stars) {
+    return ListTile(
+      leading: const CircleAvatar(
+        backgroundImage: NetworkImage('https://placehold.co/100x100/000000/FFFFFF?text=👤'),
+      ),
+      title: Text(name),
+      subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: [
-              CircleAvatar(
-                radius: screenWidth * 0.05,
-                backgroundImage: NetworkImage('https://placehold.co/100x100/CCCCCC/000000?text=${name.substring(0, 1)}'), // Placeholder avatar
+            children: List.generate(
+              5,
+                  (index) => Icon(
+                index < stars ? Icons.star : Icons.star_border,
+                size: 16,
+                color: Colors.amber,
               ),
-              SizedBox(width: screenWidth * 0.02),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: screenWidth * 0.04 / textScaleFactor,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      // Display stars based on the rating value
-                      ...List.generate(5, (index) {
-                        return Icon(
-                          index < double.parse(rating).floor()
-                              ? Icons.star
-                              : (index < double.parse(rating) ? Icons.star_half : Icons.star_border),
-                          color: Colors.amber,
-                          size: screenWidth * 0.035,
-                        );
-                      }),
-                    ],
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Text(
-                time,
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: screenWidth * 0.03 / textScaleFactor,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: screenHeight * 0.01),
-          Text(
-            comment,
-            style: TextStyle(
-              fontSize: screenWidth * 0.038 / textScaleFactor,
-              color: Colors.black87,
             ),
           ),
+          const Text('Love this product ,the qualtiy of wire and all is the best and...'),
         ],
       ),
+      trailing: Text(time, style: const TextStyle(fontSize: 12, color: Colors.grey)),
     );
   }
 
-  // Helper method to build product cards (reused from HomePage and SearchPage)
-  Widget _buildProductCard(
-      BuildContext context,
-      String title,
-      String imageUrl,
-      String price,
-      String rating,
-      String reviews,
-      double screenWidth,
-      double screenHeight,
-      double textScaleFactor) {
-    return GestureDetector(
-      onTap: () {
-        // Example of go_router navigation to a product detail page
-        context.go('/product_detail/product_${title.hashCode}', extra: {'productName': title, 'imageUrl': imageUrl, 'newPrice': price});
-      },
-      child: Container(
-        width: screenWidth * 0.4, // Responsive width
-        margin: EdgeInsets.only(right: screenWidth * 0.04), // Responsive margin
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(screenWidth * 0.025), // Responsive border radius
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(screenWidth * 0.025)),
-              child: Image.asset( // Using Image.asset for local image
-                imageUrl,
-                height: screenWidth * 0.25, // Responsive height
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: screenWidth * 0.25,
-                    width: double.infinity,
-                    color: Colors.grey[300],
-                    child: Icon(Icons.broken_image, color: Colors.grey[600]),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(screenWidth * 0.02), // Responsive padding
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: screenWidth * 0.035 / textScaleFactor),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: screenHeight * 0.005),
-                  Text(
-                    price,
-                    style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold, fontSize: screenWidth * 0.035 / textScaleFactor),
-                  ),
-                  SizedBox(height: screenHeight * 0.005),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: screenWidth * 0.035),
-                      Text(
-                        rating,
-                        style: TextStyle(fontSize: screenWidth * 0.03 / textScaleFactor, color: Colors.grey[700]),
-                      ),
-                      SizedBox(width: screenWidth * 0.01),
-                      Text(
-                        '($reviews)',
-                        style: TextStyle(fontSize: screenWidth * 0.03 / textScaleFactor, color: Colors.grey[500]),
-                      ),
-                      const Spacer(),
-                      Icon(Icons.more_vert, color: Colors.grey, size: screenWidth * 0.05),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Persistent bottom bar with Add and Favorite buttons (Copied from 009.png)
-  Widget _buildPersistentBottomBar(double screenWidth, double screenHeight, double textScaleFactor) {
+  Widget _buildFeaturedCard(BuildContext context, double screenWidth) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.02),
+      width: screenWidth * 0.4,
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, -3), // Shadow at the top
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [BoxShadow(color: Colors.grey.shade200, blurRadius: 6)],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+            child: Image.asset(
+              'assets/images/headphone.jpg',
+              width: double.infinity,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
           ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('TMA-2 HD Wireless', maxLines: 1, overflow: TextOverflow.ellipsis),
+                Text('Rp. 1.500.000', style: TextStyle(color: Colors.red)),
+                Row(
+                  children: [
+                    Icon(Icons.star, size: 14, color: Colors.amber),
+                    SizedBox(width: 2),
+                    Text('4.6'),
+                    SizedBox(width: 4),
+                    Text('(86 Reviews)', style: TextStyle(color: Colors.grey)),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
-      child: Row(
-        children: [
-          // Add button
-          Expanded(
-            flex: 3,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                debugPrint('Add button tapped');
-                // Implement add to cart logic
-              },
-              icon: Icon(Icons.add, color: Colors.white, size: screenWidth * 0.05),
-              label: Text(
-                'Added', // Changed from 'Add' to 'Added' as per image
+    );
+  }
+
+  // New method to show the Add to Cart bottom sheet
+  void _showAddToCartBottomSheet(BuildContext context, String productName, String productPrice, double screenWidth, double screenHeight, double textScaleFactor) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Allows the sheet to take full height if needed
+      backgroundColor: Colors.transparent, // Makes the background transparent to show border radius
+      builder: (BuildContext bc) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(screenWidth * 0.05)), // Rounded top corners
+          ),
+          padding: EdgeInsets.all(screenWidth * 0.05),
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Make column wrap its content
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Add to Cart',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.05 / textScaleFactor,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.close, size: screenWidth * 0.06),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              Text(
+                'Quantity',
                 style: TextStyle(
-                  color: Colors.white,
                   fontSize: screenWidth * 0.04 / textScaleFactor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(screenWidth * 0.025),
+              SizedBox(height: screenHeight * 0.01),
+              Row(
+                children: [
+                  _buildQuantityButton(Icons.remove, () { debugPrint('Decrement quantity'); }),
+                  SizedBox(width: screenWidth * 0.03),
+                  Text('1', style: TextStyle(fontSize: screenWidth * 0.05 / textScaleFactor)),
+                  SizedBox(width: screenWidth * 0.03),
+                  _buildQuantityButton(Icons.add, () { debugPrint('Increment quantity'); }),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              Text(
+                'Variant',
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04 / textScaleFactor,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-          ),
-          SizedBox(width: screenWidth * 0.03),
-          // Favorite button
-          Expanded(
-            flex: 1,
-            child: ElevatedButton(
-              onPressed: () {
-                debugPrint('Favorite button tapped');
-                // Implement favorite logic
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // Red for favorite/heart
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.015),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(screenWidth * 0.025),
+              SizedBox(height: screenHeight * 0.01),
+              Row(
+                children: [
+                  _buildVariantButton('Black', screenWidth, textScaleFactor, true), // Selected
+                  SizedBox(width: screenWidth * 0.02),
+                  _buildVariantButton('White', screenWidth, textScaleFactor, false),
+                  SizedBox(width: screenWidth * 0.02),
+                  _buildVariantButton('Blue', screenWidth, textScaleFactor, false),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total Belanja',
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04 / textScaleFactor,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  Text(
+                    productPrice, // Use the product's price
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: screenWidth * 0.05 / textScaleFactor,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    debugPrint('Add to Cart button in bottom sheet tapped');
+                    Navigator.pop(context); // Close bottom sheet
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Added $productName to cart!')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.018),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(screenWidth * 0.025),
+                    ),
+                  ),
+                  child: Text(
+                    'Add to Cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: screenWidth * 0.045 / textScaleFactor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-              child: Icon(Icons.favorite_border, color: Colors.white, size: screenWidth * 0.05),
-            ),
+            ],
           ),
-        ],
+        );
+      },
+    );
+  }
+
+  Widget _buildQuantityButton(IconData icon, VoidCallback onPressed) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Icon(icon, size: 20, color: Colors.black),
+      ),
+    );
+  }
+
+  Widget _buildVariantButton(String text, double screenWidth, double textScaleFactor, bool isSelected) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenWidth * 0.02),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.grey[200],
+        borderRadius: BorderRadius.circular(screenWidth * 0.02),
+        border: isSelected ? Border.all(color: Colors.blue) : null,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: isSelected ? Colors.blue : Colors.black,
+          fontSize: screenWidth * 0.038 / textScaleFactor,
+        ),
       ),
     );
   }

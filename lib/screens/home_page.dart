@@ -155,8 +155,19 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
+                    '25%',
+                    screenWidth,
+                    screenHeight,
+                    textScaleFactor,
+                  ),
+                  _buildProductCard(
+                    context,
+                    'TMX 210 Wireless',
+                    'assets/images/mouse.jpg', // Changed to local asset
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -166,19 +177,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
-                    '25%',
-                    screenWidth,
-                    screenHeight,
-                    textScaleFactor,
-                  ),
-                  _buildProductCard(
-                    context,
-                    'TMX 210 Wireless',
-                    'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -218,9 +218,9 @@ class _HomePageState extends State<HomePage> {
                   _buildProductCard(
                     context,
                     'TMX 210 Wireless',
-                    'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'assets/images/mouse.jpg', // Changed to local asset
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -230,8 +230,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset (assuming drill is also now headphones)
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -275,8 +275,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -285,9 +285,9 @@ class _HomePageState extends State<HomePage> {
                   _buildProductCard(
                     context,
                     'TMX 210 Wireless',
-                    'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'assets/images/mouse.jpg', // Changed to local asset
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -309,8 +309,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -319,9 +319,9 @@ class _HomePageState extends State<HomePage> {
                   _buildProductCard(
                     context,
                     'TMX 210 Wireless',
-                    'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'assets/images/mouse.jpg', // Changed to local asset
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -343,8 +343,8 @@ class _HomePageState extends State<HomePage> {
                     context,
                     'TMX 210 Wireless',
                     'assets/images/headphone.jpg', // Changed to local asset (assuming drill is also now headphones)
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -353,9 +353,9 @@ class _HomePageState extends State<HomePage> {
                   _buildProductCard(
                     context,
                     'TMX 210 Wireless',
-                    'assets/images/headphone.jpg', // Changed to local asset
-                    'Rp 1.000.000',
-                    'Rp 750.000',
+                    'assets/images/mouse.jpg', // Changed to local asset
+                    'Rs 1.000.000',
+                    'Rs 750.000',
                     '25%',
                     screenWidth,
                     screenHeight,
@@ -520,7 +520,7 @@ class _HomePageState extends State<HomePage> {
           TextButton(
             onPressed: () {
               // Example of navigation using go_router
-              context.go('/category/${title.toLowerCase().replaceAll(' ', '_')}'); // Example: navigate to a category page
+              context.go('/category'); // Example: navigate to a category page
             },
             child: Text(
               actionText,
@@ -732,7 +732,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: screenHeight * 0.02),
                 Text(
-                  'Anda perlu masuk terlebih dahulu',
+                  'You need to sign in first.',
                   style: TextStyle(
                     fontSize: screenWidth * 0.045 / textScaleFactor,
                     fontWeight: FontWeight.bold,
@@ -742,7 +742,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: screenHeight * 0.01),
                 Text(
-                  'Silahkan login/ register terlebih dahulu\nuntuk melakukan transaksi',
+                  'Please login/register first \nto make a transaction',
                   style: TextStyle(
                     fontSize: screenWidth * 0.035 / textScaleFactor,
                     color: Colors.grey[600],

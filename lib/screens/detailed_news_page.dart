@@ -18,7 +18,7 @@ class DetailNewsPage extends StatelessWidget {
 
     // Sample data for the news article (replace with actual data fetching)
     const String mainImageUrl = 'assets/images/newscar.png'; // Changed to local asset
-    const String newsTitle = 'Philosophy Tips Merawat Bodi Mobil Agar Tidak Terlihat Kusam';
+    const String newsTitle = 'Philosophy Tips for Caring for Your Car Body to Prevent It from Looking Dull';
     const String newsDate = '13 Jan 2021';
     const String newsContent = '''
 The speaker unit contains a diaphragm that is precision-grown from NAC Audio bio-cellulose, making it stiffer, lighter and stronger than regular PET speaker units, and allowing the sound-producing diaphragm to vibrate without the levels of distortion found in other speakers.
