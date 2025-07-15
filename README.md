@@ -1,17 +1,42 @@
-# ecommerce
+# 🛒 Flutter eCommerce App
 
-A new Flutter project.
+A full-featured eCommerce mobile application built using **Flutter**. This app provides a seamless shopping experience with modern UI, product listings, cart management, and secure checkout functionality.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- ✨ Beautiful UI with modern design
+- 🛍️ Browse products by categories
+- 🔍 Product detail pages
+- 🛒 Add to Cart and Cart Summary
+- 💳 Secure Checkout flow
+- 🔐 Firebase Authentication (Login / Register)
+- 🌐 Firebase Remote Config integration
+- 🌍 In-app WebView support
+- 📶 Internet connection checker
+- 🧭 Bottom navigation bar
+- 📱 Responsive for all screen sizes
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# ecommerceapp
+## 📱 Screenshots
+
+<!-- Replace with your own screenshots -->
+<img src="photo/1.png" width="200" /> <img src="screenshots/product.png" width="200" /> <img src="screenshots/cart.png" width="200" />
+
+---
+
+## 🛠️ Tech Stack
+
+- **Flutter** (Dart)
+- **Firebase** (Auth, Remote Config)
+- **Provider** 
+- **GoRouter** for navigation
+- **WebView** for external shop integration
+- **Internet Connection Checker Plus**
+
+---
+
+## 📂 Folder Structure
+
