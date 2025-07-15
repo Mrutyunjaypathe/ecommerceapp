@@ -38,5 +38,3 @@ A full-featured eCommerce mobile application built using **Flutter**. This app p
 
 ---
 
-## 📂 Folder Structure
-
