@@ -23,7 +23,7 @@ A full-featured eCommerce mobile application built using **Flutter**. This app p
 ## 📱 Screenshots
 
 <!-- Replace with your own screenshots -->
-<img src="photo/1.png" width="200" /> <img src="screenshots/product.png" width="200" /> <img src="screenshots/cart.png" width="200" />
+<img src="photo/1.png" width="200" /> <img src="photo/2.png" width="200" /> <img src="photo/3.png" width="200" /> <img src="photo/4.png" width="200" /> <img src="photo/5.png" width="200" /> <img src="photo/7.png" width="200" /> <img src="photo/8.png" width="200" /> <img src="photo/9.png" width="200" /> <img src="photo/10.png" width="200" />
 
 ---
 
